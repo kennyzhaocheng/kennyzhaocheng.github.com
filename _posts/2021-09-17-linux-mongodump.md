@@ -55,6 +55,29 @@ exit
 ```
 
 设置时间：
+shell脚本文件路径要实用绝对路径，即从根目录开始。
 ```
 0 3 * * * /data/script/mongodbfullbackup.sh >/dev/null 2>&1 &
+```
+
+### 查看定时任务实时log
+```
+tail -f /var/log/cron
+```
+
+### 我遇到错误：(root) FAILED to authorize user with PAM (Module is unknown)
+解决办法：
+打开 /etc/pam.d/crond， 把
+```
+session    required   pam_loginuid.so 
+```
+修改为：
+```
+session    sufficient   pam_loginuid.so
+```
+重启crond
+```
+service crond stop
+service crond start
+service crond status
 ```
