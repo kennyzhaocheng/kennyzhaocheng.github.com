@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Linux下mongodb创建用户和导入数据."
+description: ""
+category: "MongoDB"
+tags: ["Linux","MongoDB","mongoimport","createuser"]
+---
+{% include JB/setup %}
+
+
+### 创建新数据库新用户：
+```
+use admin
+db.auth("adminxxx","pwdxxx")
+use new_db_xxx
+db.createuser({user:"usernamexxx",pwd:"userpwdxxx",roles:[{role:"dbOwner",db:"dbnamexxx"}]})
+```
+
+### 导入数据：
+
+1. dat 文件
+```
+mongoimport -h <host>:<port> -u username -p password -d dbname -c collectionanme ../backup/works.dat
+``` 
